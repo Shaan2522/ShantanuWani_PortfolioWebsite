@@ -255,11 +255,9 @@ img {
   row-gap: 2rem;
   text-align: center;
 }
-.skills__subtitle {
-  margin-bottom: var(--mb-2);
-}
 .skills__text {
-  margin-bottom: var(--mb-4);
+  margin-bottom: var(--mb-2);
+  text-align: center;
 }
 .skills__data {
   display: flex;
@@ -292,18 +290,6 @@ img {
   height: 0.25rem;
   border-radius: 0.5rem;
   z-index: var(--z-back);
-}
-.skills__html {
-  width: 95%;
-}
-.skills__css {
-  width: 85%;
-}
-.skills__js {
-  width: 65%;
-}
-.skills__ux {
-  width: 85%;
 }
 .skills__img {
   border-radius: 0.5rem;
@@ -367,8 +353,6 @@ div {
 }
 /* Skill section heading */
 #skills h2 {
-  font-family:cursive; /* Adjust font family */
-  font-size: 40px; /* Adjust font size */
   text-align: center;
   margin-bottom: 30px; /* Add some bottom margin */
 }
