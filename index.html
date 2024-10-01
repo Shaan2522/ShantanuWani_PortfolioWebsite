@@ -236,12 +236,13 @@
             <section class="contact section" id="contact">
                 <h2 class="section-title">Contact</h2>
                 <div class="contact__container bd-grid">
-                    <form action="" class="contact__form">
-                        <input type="text" placeholder="Name" class="contact__input">
-                        <input type="mail" placeholder="Email" class="contact__input">
-                        <textarea type="text" name="" id="" cols="0" placeholder="Please write your queries here.." rows="10" class="contact__input"></textarea>
-                        <input type="button" value="Send" class="contact__button button">
+                    <form id="contactForm" class="contact__form">
+                        <input type="text" placeholder="Name" id="name" class="contact__input" required>
+                        <input type="email" placeholder="Email" id="email" class="contact__input" required>
+                        <textarea placeholder="Please write your queries here.." id="query" rows="10" class="contact__input" required></textarea>
+                        <input type="submit" value="Send" class="contact__button button">
                     </form>
+                    <div id="responseMessage"></div>
                 </div>
             </section>
         </main>
@@ -265,5 +266,27 @@
 
         <!--===== MAIN JS =====-->
         <script src="assets/js/main.js"></script>
+
+        <!--===== Contact Page =====-->
+        <script>
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const query = document.getElementById('query').value;
+                
+                fetch('https://script.google.com/macros/s/AKfycbxdtbil2z1JvjTUA9EfRpAtsCBOqG0vYXHfQw2fy1bizfjIXwuaiHDL9_ebTOX8OEi5jg/exec', { 
+                    method: 'POST',
+                    body: JSON.stringify({name: name, email: email, query: query}),
+                }).then(response => response.json()).then(data => {
+                    if (data.result === 'success') {
+                        document.getElementById('responseMessage').innerText = "Thank you! Your query has been submitted.";
+                    } else {
+                        document.getElementById('responseMessage').innerText = "Oops! There was a problem.";
+                    }
+                }).catch(error => console.error('Error:', error));
+            });
+        </script>
     </body>
 </html>
