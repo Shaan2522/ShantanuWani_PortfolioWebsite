@@ -276,16 +276,25 @@
                 const email = document.getElementById('email').value;
                 const query = document.getElementById('query').value;
                 
-                fetch('https://script.google.com/macros/s/AKfycbxdtbil2z1JvjTUA9EfRpAtsCBOqG0vYXHfQw2fy1bizfjIXwuaiHDL9_ebTOX8OEi5jg/exec', { 
+                fetch('https://script.google.com/macros/s/AKfycbxdtbil2z1JvjTUA9EfRpAtsCBOqG0vYXHfQw2fy1bizfjIXwuaiHDL9_ebTOX8OEi5jg/exec', {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify({name: name, email: email, query: query}),
-                }).then(response => response.json()).then(data => {
+                })
+                .then(response => response.json())
+                .then(data => {
                     if (data.result === 'success') {
                         document.getElementById('responseMessage').innerText = "Thank you! Your query has been submitted.";
                     } else {
                         document.getElementById('responseMessage').innerText = "Oops! There was a problem.";
                     }
-                }).catch(error => console.error('Error:', error));
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('responseMessage').innerText = "Error sending the form. Please try again.";
+                });
             });
         </script>
     </body>
